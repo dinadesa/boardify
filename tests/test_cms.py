@@ -40,6 +40,15 @@ def test_index_pins_the_script_version(site):
     assert "@sveltia/cms@1.2.3/dist" in html and 'integrity="sha384-abc"' in html
 
 
+def test_there_is_no_updated_field_and_no_save_hook(site):
+    index = cms.build_index(site)
+    assert "preSave" not in index and index.count("<script") == 1  # only the Sveltia script
+    config = yaml.safe_load(cms.build_config(site))
+    for collection in config["collections"]:
+        assert "updated" not in [f["name"] for f in collection["fields"]]
+    assert "datetime" not in cms.build_config(site)
+
+
 def test_unpinned_version_is_refused(site):
     site["cms"]["sveltia_version"] = ""
     with pytest.raises(SystemExit):

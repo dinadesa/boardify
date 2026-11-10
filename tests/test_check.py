@@ -15,7 +15,7 @@ def write(path, **meta):
 def root(tmp_path):
     write(tmp_path / "0100-mission" / "index.md", title="Mission", code='"0100"')
     folder = tmp_path / "0100-mission" / "0100-01-mission"
-    write(folder / "index.md", code="0100-01", title="Mission", kind="Policy", updated="2026-01-01")
+    write(folder / "index.md", code="0100-01", title="Mission", kind="Policy")
     return tmp_path
 
 
@@ -37,7 +37,7 @@ def test_unquoted_section_code_is_an_error(root, capsys):
 
 def test_unsafe_title_is_an_error(root, capsys):
     folder = root / "0100-mission" / "0100-01-mission"
-    write(folder / "index.md", code="0100-01", title='"Q&A"', kind="Policy", updated="x")
+    write(folder / "index.md", code="0100-01", title='"Q&A"', kind="Policy")
     status, out = run(root, capsys)
     assert status == 1 and "unsafe" in out
 
@@ -52,7 +52,7 @@ def test_regulation_needs_matching_kind_and_code(root, capsys):
 def test_unknown_reference_warns_but_school_year_does_not(root, capsys):
     folder = root / "0100-mission" / "0100-01-mission"
     (folder / "index.md").write_text(
-        "---\ncode: 0100-01\ntitle: Mission\nkind: Policy\nupdated: x\n---\nSee 0999-01 and 2017-18.\n"
+        "---\ncode: 0100-01\ntitle: Mission\nkind: Policy\n---\nSee 0999-01 and 2017-18.\n"
     )
     status, out = run(root, capsys)
     assert status == 0 and "unknown code 0999-01" in out and "2017-18" not in out

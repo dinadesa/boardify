@@ -20,7 +20,6 @@ content/
 | `code` | required, `####-##`, equal to the folder's code | required, quoted string equal to the section folder's code (`"0100"`) |
 | `title` | required; a Regulation's should equal its Policy's | required |
 | `kind` | required, `Policy` or `Regulation` (the file name is not the source of truth) | must be absent |
-| `updated` | expected (the CMS sets it on every save) | |
 | `reference` | optional; external citations shown in the footer and on the PDF | |
 
 Quote section codes: unquoted, YAML reads `0100` as the number 100 (or an octal), losing the leading zero.
@@ -32,7 +31,7 @@ frontmatter, missing `code`/`title`/`kind`, a code or kind that disagrees with t
 codes, a section code that is not the quoted string, and titles containing characters that are unsafe in a PDF
 name or URL (`/ \ ? # % & : ; ' " + = @ < > [ ] { } | ^ ~ ` * ! $`).
 
-Warnings: a missing `updated`, a Regulation whose title differs from its Policy's, and an internal reference
+Warnings: a Regulation whose title differs from its Policy's, and an internal reference
 (`####-##`) to a code that does not exist. School years such as `2017-18` are ignored.
 
 ## PDF names

@@ -83,10 +83,6 @@ def collection(cfg, section, kind):
         label: Kind
         widget: hidden
         default: {kind}
-      - name: updated
-        label: Updated
-        widget: hidden
-        default: '{{{{datetime}}}}'
       - name: reference
         label: Reference
         widget: text
@@ -163,15 +159,6 @@ def build_index(cfg):
   </head>
   <body>
     <script src="{src}"{integrity}></script>
-    <script>
-      CMS.registerEventListener({{
-        name: 'preSave',
-        handler: ({{ entry }}) => {{
-          const data = entry.get('data');
-          return data.has('updated') ? data.set('updated', new Date().toISOString()) : data;
-        }},
-      }});
-    </script>
   </body>
 </html>
 """

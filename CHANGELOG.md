@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.3
+- Policies and regulations no longer carry `updated` metadata. The CMS config drops the `updated` field and the `preSave` hook that stamped it on every save, and `check` no longer warns about a missing `updated`. Existing `updated` values in content are harmless and ignored.
+
 ## 0.5.2
 - The project moved to the `dinadesa` GitHub organization; repository, docs and install URLs point there.
 

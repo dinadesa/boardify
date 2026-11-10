@@ -92,8 +92,6 @@ def check_policy(item, root, errors, warnings, codes, bodies):
             errors.append(f"code {post.get('code')!r} != folder {code}: {where}")
         if post.get("kind") != kind:
             errors.append(f"kind {post.get('kind')!r} != {kind}: {where}")
-        if not post.get("updated"):
-            warnings.append(f"missing updated: {where}")
         title = post.get("title")
         if title and not title_is_safe(title):
             errors.append(f"title has characters that are unsafe in a PDF name/URL: {title!r}: {where}")
